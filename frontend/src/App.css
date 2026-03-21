@@ -1,0 +1,66 @@
+/* ===== PAGE LAYOUT ===== */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ===== TABLE ===== */
+.table-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* KEY: keeps columns consistent */
+}
+
+th,
+td {
+  padding: 10px;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+
+/* Prevent long titles from shifting layout too much */
+td:nth-child(1) {
+  width: 20%;
+}
+
+/* ===== PAGINATION (Previous / Next) ===== */
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===== PAGE NUMBER BUTTONS ===== */
+.page-buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-buttons button {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+}
+
+.page-buttons button:hover {
+  background: var(--accent-bg);
+}
+
+/* Active page highlight */
+.active-page {
+  font-weight: bold;
+  background-color: var(--accent-bg);
+  border-color: var(--accent);
+}
