@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Mission11.API.Models;
 
-namespace Mission11.API.Controllers;
+// This controller handles API requests for retrieving books from the database.
+// It supports pagination (page size and page number), sorting (e.g., by title),
+// and returns both the list of books and the total number of books for frontend use.
 
-// This controller handles API requests for retrieving books.
-// It supports pagination (page size and page number)
-// and sorting (e.g., by title) based on query parameters.
-// Data is fetched from the database and returned to the frontend.
+namespace Mission11.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -20,10 +19,15 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortBy = "")
+    public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortBy = "", string category = "")
     {
         var query = _context.Books.AsQueryable();
-        
+
+        if (!string.IsNullOrEmpty(category) && category.ToLower() != "all")
+        {
+            query = query.Where(b => b.Category == category);
+        }
+
         if (sortBy.ToLower() == "title")
         {
             query = query.OrderBy(b => b.Title);
