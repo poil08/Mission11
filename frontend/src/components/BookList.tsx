@@ -1,8 +1,8 @@
 import type { Book } from '../types/Book';
 
-// This component displays a list of books in a Bootstrap-styled table.
-// It receives book data as props and renders each book as a row.
-// It also includes an "Add to Cart" button for each book.
+// BookList.tsx
+// This component displays a list of books.
+// It shows book details and allows users to add books to the cart.
 
 type BookListProps = {
   books: Book[];

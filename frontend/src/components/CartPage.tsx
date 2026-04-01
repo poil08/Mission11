@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import type { Book } from '../types/Book';
 
-// This component represents the full shopping cart page.
-// It displays all items in the cart with their quantity, subtotal, and total price.
-// It also provides a "Continue Shopping" button to return to the main page.
+// CartPage.tsx
+// This component displays the user's shopping cart.
+// It shows selected books, quantities, and total price.
 
 type CartItem = Book & { quantity: number };
 

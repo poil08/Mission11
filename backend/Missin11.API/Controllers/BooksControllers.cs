@@ -3,6 +3,11 @@ using Mission11.API.Models;
 
 namespace Mission11.API.Controllers;
 
+// BooksController.cs
+// This controller handles all API requests related to books.
+// It supports retrieving books with pagination/filtering,
+// as well as adding, updating, and deleting books from the database.
+
 [ApiController]
 [Route("[controller]")]
 public class BooksController : ControllerBase

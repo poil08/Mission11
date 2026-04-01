@@ -1,5 +1,9 @@
 namespace Mission11.API.Models;
 
+// Book.cs
+// This model represents a Book entity in the database.
+// Each property corresponds to a column in the Books table.
+
 public class Book
 {
     public int BookId { get; set; }

@@ -1,5 +1,9 @@
 import type { Book } from '../types/Book';
 
+// BooksAPI.ts
+// This file contains functions for making API calls to the backend.
+// It handles fetching, creating, updating, and deleting books.
+
 export interface FetchBooksResponse {
   books: Book[];
   totalNumBooks: number;

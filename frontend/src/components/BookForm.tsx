@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import type { Book } from '../types/Book';
 
+// BookForm.tsx
+// This component renders the form used to add or edit a book.
+// It handles user input and submits data to the parent component.
+
 type BookFormProps = {
   book: Book;
   onSave: (book: Book) => void;

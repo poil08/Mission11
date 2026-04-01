@@ -9,6 +9,10 @@ import {
 import BookForm from './BookForm';
 import { Link } from 'react-router-dom';
 
+// AdminBookPage.tsx
+// This component provides an admin interface for managing books.
+// Users can add, edit, and delete books from the database.
+
 function AdminBookPage() {
   const emptyBook: Book = {
     bookId: 0,
