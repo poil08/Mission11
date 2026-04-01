@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Mission11.API.Models;
 
-// This controller handles API requests for retrieving books from the database.
-// It supports pagination (page size and page number), sorting (e.g., by title),
-// and returns both the list of books and the total number of books for frontend use.
-
 namespace Mission11.API.Controllers;
 
 [ApiController]
@@ -42,10 +38,60 @@ public class BooksController : ControllerBase
 
         var result = new
         {
-            Books = books,
-            TotalNumBooks = totalNumBooks
+            books = books,
+            totalNumBooks = totalNumBooks
         };
 
         return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult AddBook([FromBody] Book newBook)
+    {
+        _context.Books.Add(newBook);
+        _context.SaveChanges();
+
+        return Ok(newBook);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateBook(int id, [FromBody] Book updatedBook)
+    {
+        var existingBook = _context.Books.Find(id);
+
+        if (existingBook == null)
+        {
+            return NotFound();
+        }
+
+        existingBook.Title = updatedBook.Title;
+        existingBook.Author = updatedBook.Author;
+        existingBook.Publisher = updatedBook.Publisher;
+        existingBook.Isbn = updatedBook.Isbn;
+        existingBook.Classification = updatedBook.Classification;
+        existingBook.Category = updatedBook.Category;
+        existingBook.PageCount = updatedBook.PageCount;
+        existingBook.Price = updatedBook.Price;
+
+        _context.Books.Update(existingBook);
+        _context.SaveChanges();
+
+        return Ok(existingBook);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteBook(int id)
+    {
+        var book = _context.Books.Find(id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        _context.Books.Remove(book);
+        _context.SaveChanges();
+
+        return NoContent();
     }
 }

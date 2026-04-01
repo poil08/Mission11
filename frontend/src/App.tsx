@@ -9,10 +9,12 @@ import {
 import type { Book } from './types/Book';
 import BookList from './components/BookList';
 import CartPage from './components/CartPage';
+import { fetchBooks } from './api/BooksAPI';
+import AdminBookPage from './components/AdminBookPage';
 
 // This is the main application component.
 // It manages global state such as books, pagination, filtering, and the shopping cart.
-// It also handles routing between the home page and the cart page,
+// It also handles routing between the home page, cart page, and admin page,
 // and integrates Bootstrap components like cards, grid layout, and modal.
 
 function AppContent() {
@@ -27,13 +29,13 @@ function AppContent() {
   const [cart, setCart] = useState<(Book & { quantity: number })[]>([]);
 
   useEffect(() => {
-    fetch(
-      `http://localhost:5106/Books?pageSize=${pageSize}&pageNum=${pageNum}&sortBy=${sortBy}&category=${selectedCategory}`
-    )
-      .then((res) => res.json())
+    fetchBooks(pageSize, pageNum, sortBy, selectedCategory)
       .then((data) => {
         setBooks(data.books);
         setTotalBooks(data.totalNumBooks);
+      })
+      .catch((error) => {
+        console.error('Error fetching books:', error);
       });
   }, [pageNum, pageSize, sortBy, selectedCategory]);
 
@@ -99,7 +101,17 @@ function AppContent() {
 
   const homePage = (
     <div className="container mt-4">
-      <h1 className="text-center mb-4">Bookstore</h1>
+      <h1 className="text-center mb-4 text-dark fw-bold">Bookstore</h1>
+
+      <div className="d-flex justify-content-center gap-2 mb-4">
+        <Link to="/adminbooks" className="btn btn-outline-dark">
+          Admin Book Page
+        </Link>
+
+        <Link to="/cart" className="btn btn-outline-primary">
+          Go to Cart
+        </Link>
+      </div>
 
       <div className="row g-4">
         <div className="col-lg-9">
@@ -222,6 +234,10 @@ function AppContent() {
                   <Link to="/cart" className="btn btn-outline-primary">
                     Go to Cart
                   </Link>
+
+                  <Link to="/adminbooks" className="btn btn-outline-dark">
+                    Admin Page
+                  </Link>
                 </div>
 
                 {cart.length === 0 ? (
@@ -329,6 +345,7 @@ function AppContent() {
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/cart" element={<CartPage cart={cart} />} />
+      <Route path="/adminbooks" element={<AdminBookPage />} />
     </Routes>
   );
 }

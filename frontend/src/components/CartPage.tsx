@@ -19,7 +19,7 @@ function CartPage({ cart }: CartPageProps) {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Shopping Cart</h1>
+      <h1 className="mb-4 text-dark fw-bold">Shopping Cart</h1>
 
       {cart.length === 0 ? (
         <div>
