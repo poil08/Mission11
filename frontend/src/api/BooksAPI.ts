@@ -9,7 +9,8 @@ export interface FetchBooksResponse {
   totalNumBooks: number;
 }
 
-const API_URL = 'http://localhost:5106/Books';
+const API_URL =
+  'https://mission13-backend-hvbwgmb4ehh8akc7.westus2-01.azurewebsites.net/Books';
 
 export const fetchBooks = async (
   pageSize: number,
